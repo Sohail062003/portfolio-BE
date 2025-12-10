@@ -88,6 +88,23 @@ class AuthController {
       });
     }
   }
+
+  static async verifyToken(req, res) {
+    try {
+      return res.status(200).json({
+        status: true,
+        message: "Token is valid",
+        data: { user: req.user },
+      })
+    } catch (error) {
+      console.error("SomeThing went wrong in Token verification", error);
+      return res.status(500).json({
+        status: false,
+        message: "Internal Server Error",
+        data: {},
+      });
+    }
+  }
 }
 
 module.exports = AuthController;

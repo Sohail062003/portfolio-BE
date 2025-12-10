@@ -29,7 +29,10 @@ class AuthService {
       const match = await bcrypt.compare(password, user.password);
       if (!match) throw new Error("Invalid credentials");
 
-      const accessToken = createAccessToken({ id: user._id });
+      const accessToken = createAccessToken({ 
+        id: user._id,
+        name: user.name
+      });
       const refreshToken = createRefreshToken({ id: user._id });
 
       await refreshTokenModel.deleteMany({ user: user._id });
